@@ -11,9 +11,46 @@
     <input type="submit" value="Submit"></input>
 </form>
 
+<script type="text/javascript">
+$(document).ready(function()
+{
+    $(".answer_block .like").click(function()
+    {
+        var id=$(this).attr("id");
+        var name=$(this).attr("name");
+        var dataString = 'id='+ id + '&name='+ name + '&redirect={{ request.path }}';
+        var $button = $(this);
+        
+        $.ajax
+        ({
+            type: "POST",
+            url: "{% url answer_rating %}",
+            data: dataString,
+            cache: false,
+            success: function(json)
+            {
+                $button.siblings(".rating").text(json['rating']);
+            }
+        });
+    });
+
+});
+</script>
+
+<div id="answers">
 {% for answer in question.answers.all %}
+<div class="answer_block">
+    <div class="rating">
+        <a href="#" class="like" id="{{ answer.pk }}" name="up">Like</a>
+        <p class="rating">{{ answer.rating }}</p>
+        <a href="#" class="like" id="{{ answer.pk }}" name="down">Dislike</a>
+    </div>
+    <div class="answer">
     <h3>Posted By: {{ answer.posted_by|default:"Anonymous" }}, Posted On: {{ answer.posted_on }}</h3>
     <p>{{ answer.answer }}</p>
+    </div>
+</div>
 {% endfor %}
+</div>
 {% endblock %}
 
