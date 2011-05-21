@@ -4,7 +4,7 @@ import unittest
 class TestCombinations(unittest.TestCase):
 
     def test_combinations(self):
-        c = combinations.generate_combinations("WXYZ", 2)
+        c = [comb for comb in combinations.generate_combinations("WXYZ", 2)]
         res = [
             ['W', 'X'], ['W', 'Y'], ['W', 'Z'],
             ['X', 'Y'], ['X', 'Z'],
@@ -12,7 +12,7 @@ class TestCombinations(unittest.TestCase):
         ]
         self.assertEqual(c, res)
         
-        c = combinations.generate_combinations("WWYZ", 3)
+        c = [comb for comb in combinations.generate_combinations("WWYZ", 3)]
         res = [
             ['W', 'W', 'Y'], ['W', 'W', 'Z'],
             ['W', 'Y', 'Z'], ['W', 'Y', 'Z'],
@@ -20,7 +20,7 @@ class TestCombinations(unittest.TestCase):
         self.assertEqual(c, res)
 
     def test_invalid_n(self):
-        c = combinations.generate_combinations("WWYZ", 5)
+        c = [comb for comb in combinations.generate_combinations("WWYZ", 5)]
         self.assertEqual(len(c), 0)
 
 if __name__ == '__main__':
