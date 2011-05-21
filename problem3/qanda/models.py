@@ -3,7 +3,7 @@ from django.db import models
 class PostModel(models.Model):
     posted_by = models.CharField(max_length=50, blank=True, null=True)
     posted_on = models.DateTimeField(auto_now_add=True)
-    rating = models.IntegerField(default=0)
+    rating = models.IntegerField(default=0, editable=False)
     
     class Meta:
         abstract = True
