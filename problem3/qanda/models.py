@@ -13,6 +13,6 @@ class Question(PostModel):
     
     
 class Answer(PostModel):
-    question = models.ForeignKey("Question")
+    question = models.ForeignKey("Question", editable=False, related_name="answers")
     answer = models.TextField(max_length=100)
     

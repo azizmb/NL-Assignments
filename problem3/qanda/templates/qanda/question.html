@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>{{ question.question }}</h2>
+<h3>Posted By: {{ question.posted_by|default:"Anonymous" }}, Posted On: {{ question.posted_on }}</h3>
+
+
+<form method="POST" action={{ form.action }}>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit"></input>
+</form>
+
+{% for answer in question.answers.all %}
+    <h3>Posted By: {{ answer.posted_by|default:"Anonymous" }}, Posted On: {{ answer.posted_on }}</h3>
+    <p>{{ answer.answer }}</p>
+{% endfor %}
+{% endblock %}
+
