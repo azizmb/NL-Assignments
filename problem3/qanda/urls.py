@@ -9,3 +9,7 @@ urlpatterns = patterns('qanda.views',
     url(r'^recent/answer', 'recent', {'model': Answer}, name="answer_recent"),
     url(r'^recent/question', 'recent', {'model': Question}, name="question_recent"),
 )
+
+urlpatterns += (
+    url(r'^questions/$', 'django.views.generic.list_detail.object_list', {'queryset':Question.objects.all()}, name="question_list"),
+)

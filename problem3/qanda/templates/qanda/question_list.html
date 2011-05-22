@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% for question in object_list %}
+<div class="post">
+    {% include "qanda/question_block.html" %}
+</div>
+{% endfor %}
+{% endblock %}
