@@ -1,16 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>{{ question.question }}</h2>
-<h3>Posted By: {{ question.posted_by|default:"Anonymous" }}, Posted On: {{ question.posted_on }}</h3>
-
-
-<form method="POST" action={{ form.action }}>
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Submit"></input>
-</form>
-
 <script type="text/javascript">
 $(document).ready(function()
 {
@@ -44,22 +34,48 @@ $(document).ready(function()
 });
 </script>
 
+<div class="post">
+    <div class="right">
+	<h2>{{ question.question }}</h2>
+    </div>
+    
+    <div class="left">
+
+	    <p class="dateinfo">{{ question.posted_on|date:"M" }}<span>{{ question.posted_on|date:"d" }}</span></p>
+
+	    <div class="post-meta">
+		    <h4>Post Info</h4>
+		    <ul>
+		       <li class="user">{{ question.posted_by|default:"Anonymous" }}</li>
+		       <li class="time">{{ question.posted_on|date:"P" }}</li>
+		       <li class="permalink"><a href="{{ question.get_absolute_url }}">Permalink</a></li>
+		    </ul>
+	    </div>
+
+	</div>
+</div>
+
 <div id="answers">
 {% for answer in question.answers.all %}
-    <a name="{{ answer.pk }}">
-        <div class="answer_block">
-            <div class="rating_block">
+        <div class="post answer_block">
+	    <div class="right">
+		<p>{{ answer.answer }}</p>
+		<p class="post-info">Posted By {{ answer.posted_by }}, Posted On {{ answer.posted_on }} <a href="{{ answer.get_absolute_url }}">Permalink</a></p>
+            </div>
+            <div class="left">
                 <a href="#" class="like" id="{{ answer.pk }}" name="up">Like</a>
                 <p class="rating">{{ answer.rating }}</p>
                 <a href="#" class="like" id="{{ answer.pk }}" name="down">Dislike</a>
             </div>
-            <div class="answer">
-            <h3>Posted By: {{ answer.posted_by|default:"Anonymous" }}, Posted On: {{ answer.posted_on }}</h3>
-            <p>{{ answer.answer }}</p>
-            </div>
         </div>
-    </a>
+    
 {% endfor %}
 </div>
+
+<form method="POST" action={{ form.action }}>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit"></input>
+</form>
 {% endblock %}
 
