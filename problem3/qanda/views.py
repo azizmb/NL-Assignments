@@ -43,7 +43,7 @@ def recent(request, model):
     timestamp = datetime.datetime.fromtimestamp(timestamp)
     
     #hack to get url in json
-    query = model.objects.filter(updated_on__gt=timestamp).order_by("-updated_on")[:10]
+    query = model.objects.filter(updated_on__gt=timestamp).order_by("updated_on")[:10]
     updates = list(query)
     updates2 = query.values()
     for val in range(len(updates2)):
