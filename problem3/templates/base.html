@@ -40,12 +40,12 @@
 		<ul>
 			<li><a href="{% url landing_page %}">Home</a></li>
 			<li><a href="{% url question_list %}">All Questions</a></li>
-			<li><a href="">Problem Statement</a></li>
+			<li><a href="{% url problem_statement %}">Problem Statement</a></li>
 		</ul>
 	</div>
 
    <p id="rss">
-      <a href="index.html">Grab the RSS feed</a>
+      <a href="{% url question_feed %}">Grab the RSS feed</a>
    </p>
 
 
@@ -114,13 +114,13 @@
 <h3>Updates</h3>
 
       <ul class="subscribe-stuff">
-      	<li><a title="RSS" href="index.html" rel="nofollow">
-				<img alt="RSS" title="RSS" src="{{ MEDIA_URL }}images//social_rss.png" /></a>
+      	<li><a title="RSS" href="{% url question_feed %}" rel="nofollow">
+				<img alt="RSS" title="RSS" src="{{ MEDIA_URL }}images/social_rss.png" /></a>
 			</li>
       </ul>
 
 	<p>Stay up to date. Subscribe via
-		<a href="index">RSS</a>.
+		<a href="{% url question_feed %}">RSS</a>.
 	</p>
 
 	</div>

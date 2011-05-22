@@ -5,7 +5,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
-    url(r'^problem/$', 'django.views.generic.simple.direct_to_template', {'template': 'problem_statement.html'}),
+    url(r'^problem/$', 'django.views.generic.simple.direct_to_template', {'template': 'problem_statement.html'}, name="problem_statement"),
     url(r'^', include("qanda.urls")),
 )
 
