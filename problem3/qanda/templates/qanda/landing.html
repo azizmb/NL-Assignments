@@ -6,4 +6,65 @@
     {{ form.as_p }}
     <input type="submit" value="Submit"></input>
 </form>
+<script>
+$(document).ready(function() {
+function poll_answers() {
+  if (updating_answers) {return}
+  updating_answers = true
+  $.ajax({
+   type: "GET",
+   url: "{% url question_recent %}",
+   data: "timestamp="+timestamp_answers,
+   success: function(json){
+      var d = new Date();
+      timestamp_questions = (d.getTime()-d.getMilliseconds())/1000;
+      updating_answers = false;
+      
+      $.each(json, function(i, item) {
+        $('ul.recent li:first-child').before("<li>"+item+"</li>");
+        $("ul.recent:empty").append("<li>"+item+"</li>");   
+     });​
+   },
+   error: function(e){
+      updating_answers = false;   
+   }
+ });
+}
+
+function poll_questions() {
+  if (updating_questions) {return}
+  updating_questions = true
+  $.ajax({
+   type: "GET",
+   url: "{% url question_recent %}",
+   data: "timestamp="+timestamp_questions,
+   success: function(json){
+      var d = new Date();
+      timestamp_answers = (d.getTime()-d.getMilliseconds())/1000;
+      updating_questions = false;
+      
+      $.each(json, function(i, item) {
+        $('ul.recent li:first-child').before("<li>"+item+"</li>");
+        $("ul.recent:empty").append("<li>"+item+"</li>");   
+     });​
+   },
+   error: function(e){
+      updating_questions = false;   
+   }
+ });
+}
+  var updating_answers = false;
+  var updating_questions = false;
+  var timestamp_answers = 0;
+  var timestamp_questions = 0;
+  var update_interval = 10000;
+  
+  poll_answers();
+  poll_questions();
+
+  setInterval(poll_answers, update_interval);
+  setInterval(poll_questions, update_interval);
+});
+</script>
+<ul class="recent"></ul>
 {% endblock %}

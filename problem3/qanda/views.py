@@ -1,4 +1,5 @@
 from simplejson import dumps
+import datetime
 
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
@@ -24,6 +25,27 @@ def rating(request, model):
     
     response = HttpResponse(
         content=dumps({"rating": instance.rating}),
+        mimetype='application/json'
+    )
+    return response
+
+def handler(obj):
+    """
+    http://stackoverflow.com/questions/455580/json-datetime-between-python-and-javascript
+    """
+    if hasattr(obj, 'isoformat'):
+        return obj.isoformat()
+    else:
+        raise TypeError, 'Object of type %s with value of %s is not JSON serializable' % (type(Obj), repr(Obj))
+
+def recent(request, model):
+    timestamp = int(request.GET.get("timestamp", 0))
+    timestamp = datetime.datetime.fromtimestamp(timestamp)
+    
+    updates = model.objects.filter(updated_on__gt=timestamp).order_by("-updated_on")[:10].values()
+    
+    response = HttpResponse(
+        content=dumps(list(updates), default=handler),
         mimetype='application/json'
     )
     return response
