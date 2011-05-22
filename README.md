@@ -46,11 +46,18 @@ Problem 2
 
 Write a function which takes a string as it’s input and returns a URL encoded format
 of the same. Well its obvious that you can't use an inbuilt function.
-Reference : http://www.w3schools.com/TAGS/ref_urlencode.asp
+
+Reference:
+
+http://www.w3schools.com/TAGS/ref_urlencode.asp
+
 http://www.blooberry.com/indexdot/html/topics/urlencoding.htm
+
 Expected output :
+
 - Take a string URL input and produce output as a form of URL encoded
 string.
+
 - Consider w3 rules of url size and length of parameters
 
 
@@ -72,7 +79,7 @@ Problem 3
 Design and implement a simple QnA forum using Django. Assume that the system
 is publicly accessible and does not require a user to register and log in. One can
 directly post the question and can answer them. Just like stack-overflow or yahoo
-answers. The flow and the spec of the application is as follows :
+answers. The flow and the spec of the application is as follows:
 
 1. Application shall consist of two types of pages only.
     a. Landing page
