@@ -31,6 +31,6 @@ The application can now be accessed by browsing to http://localhost:8000/
 
 Screenshots:
 ------------
-![Landing Page](http://i.imgur.com/TiLwW.png)
-![Question Page](http://i.imgur.com/pL0yt.png)    
+![Landing Page](http://i.imgur.com/gDhc4.png)
+![Question Page](http://i.imgur.com/2sKaJ.png)    
     
