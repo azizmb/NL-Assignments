@@ -35,24 +35,7 @@ $(document).ready(function()
 </script>
 
 <div class="post">
-    <div class="right">
-	<h2>{{ question.question }}</h2>
-    </div>
-    
-    <div class="left">
-
-	    <p class="dateinfo">{{ question.posted_on|date:"M" }}<span>{{ question.posted_on|date:"d" }}</span></p>
-
-	    <div class="post-meta">
-		    <h4>Post Info</h4>
-		    <ul>
-		       <li class="user">{{ question.posted_by|default:"Anonymous" }}</li>
-		       <li class="time">{{ question.posted_on|date:"P" }}</li>
-		       <li class="permalink"><a href="{{ question.get_absolute_url }}">Permalink</a></li>
-		    </ul>
-	    </div>
-
-	</div>
+    {% include "qanda/question_block.html" %}
 </div>
 
 <div id="answers">
