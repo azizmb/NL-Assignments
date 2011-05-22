@@ -12,7 +12,17 @@ class PostModel(models.Model):
 class Question(PostModel):
     question = models.TextField(max_length=100)
     
+    @models.permalink
+    def get_absolute_url(self):
+        return (
+            'qanda.views.question',
+            [self.pk]
+        )
+    
 class Answer(PostModel):
     question = models.ForeignKey("Question", editable=False, related_name="answers")
     answer = models.TextField(max_length=100)
+    
+    def get_absolute_url(self):
+        return "%s#%d"%(self.question.get_absolute_url(), self.pk)
     
