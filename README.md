@@ -73,35 +73,48 @@ Design and implement a simple QnA forum using Django. Assume that the system
 is publicly accessible and does not require a user to register and log in. One can
 directly post the question and can answer them. Just like stack-overflow or yahoo
 answers. The flow and the spec of the application is as follows :
+
 1. Application shall consist of two types of pages only.
     a. Landing page
     b. Individual question page
+    
 2. Landing page
     a. This shall have a prominent question field on top alongside an ‘Ask’ 
 button. One can ask random questions and post them right away.
 A ‘Post As’ field can also be included to incorporate name information
 with that question, just for the sake of identifying who posted it.
+
     b. Landing page shall also list recent activity of questions being answered
 and the answers being posted. Question and answer links shall be
 clickable and would land on Individual Question Page explained in
+
 3. This may be implemented via an RSS feed which gets updated as
 per it’s TTL value. Front-end updates the feed over AJAX i.e. without
 loading the page. (Similar to what Twitter does).
+
     c. Ref. http://www.jjude.com/2008/06/adding-rss-feeds-to-django-
 applications/
+
 3. Individual question page
+
     a. This page shall display the question in bold and on top of the page
+    
     b. Question shall be followed by the answers posted
+    
     c. Finally, there shall be an empty field which may allow a user to post an
 answer
+
     d. Answers may be rated up and down (Stackoverflow-like) and shall be
 displayed in the sorted order of their rating, best answer shown first.
 
 
 Great To Have :
+
 - A pagination of questions and answers in case loading all of them is ruining
 it.
+
 - One click standard RSS feed that can be subscribed with standard RSS
 readers and email clients. You can make use of libraries.
+
 - Brownie points for a good UI
 
