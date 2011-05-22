@@ -92,5 +92,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.admin',
     
+    # Project Apps
     'qanda',
+    
+    # Generic Apps
+    'south',
 )
