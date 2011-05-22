@@ -36,16 +36,21 @@ def handler(obj):
     if hasattr(obj, 'isoformat'):
         return obj.isoformat()
     else:
-        raise TypeError, 'Object of type %s with value of %s is not JSON serializable' % (type(Obj), repr(Obj))
+        raise TypeError, 'Object of type %s with value of %s is not JSON serializable' % (type(obj), repr(obj))
 
 def recent(request, model):
     timestamp = int(request.GET.get("timestamp", 0))
     timestamp = datetime.datetime.fromtimestamp(timestamp)
     
-    updates = model.objects.filter(updated_on__gt=timestamp).order_by("-updated_on")[:10].values()
+    #hack to get url in json
+    query = model.objects.filter(updated_on__gt=timestamp).order_by("-updated_on")[:10]
+    updates = list(query)
+    updates2 = query.values()
+    for val in range(len(updates2)):
+	updates2[val].update({'url': updates[val].get_absolute_url()})
     
     response = HttpResponse(
-        content=dumps(list(updates), default=handler),
+        content=dumps(list(updates2), default=handler),
         mimetype='application/json'
     )
     return response

@@ -7,13 +7,21 @@
     <input type="submit" value="Submit"></input>
 </form>
 <script>
+
+function format_update(title, url, time){
+  return "<li>"
+        +"<a href="+url+"><h5>"+ title +"</h5></a>"
+        +"<p>Updated at: "+time+"</p>"
+        +"</li>"
+}
+
 $(document).ready(function() {
 function poll_answers() {
   if (updating_answers) {return}
   updating_answers = true
   $.ajax({
    type: "GET",
-   url: "{% url question_recent %}",
+   url: "{% url answer_recent %}",
    data: "timestamp="+timestamp_answers,
    success: function(json){
       var d = new Date();
@@ -21,8 +29,9 @@ function poll_answers() {
       updating_answers = false;
       
       $.each(json, function(i, item) {
-        $('ul.recent li:first-child').before("<li>"+item+"</li>");
-        $("ul.recent:empty").append("<li>"+item+"</li>");   
+        var html = format_update(item.answer, item.url, item.updated_on);
+        $('ul.recent li:first-child').before(html);
+        $("ul.recent:empty").append(html);   
      });​
    },
    error: function(e){
@@ -44,8 +53,9 @@ function poll_questions() {
       updating_questions = false;
       
       $.each(json, function(i, item) {
-        $('ul.recent li:first-child').before("<li>"+item+"</li>");
-        $("ul.recent:empty").append("<li>"+item+"</li>");   
+        var html = format_update(item.question, item.url, item.updated_on);
+        $('ul.recent li:first-child').before(html);
+        $("ul.recent:empty").append(html);   
      });​
    },
    error: function(e){

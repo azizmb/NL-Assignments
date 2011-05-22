@@ -46,17 +46,19 @@ $(document).ready(function()
 
 <div id="answers">
 {% for answer in question.answers.all %}
-    <div class="answer_block">
-        <div class="rating_block">
-            <a href="#" class="like" id="{{ answer.pk }}" name="up">Like</a>
-            <p class="rating">{{ answer.rating }}</p>
-            <a href="#" class="like" id="{{ answer.pk }}" name="down">Dislike</a>
+    <a name="{{ answer.pk }}">
+        <div class="answer_block">
+            <div class="rating_block">
+                <a href="#" class="like" id="{{ answer.pk }}" name="up">Like</a>
+                <p class="rating">{{ answer.rating }}</p>
+                <a href="#" class="like" id="{{ answer.pk }}" name="down">Dislike</a>
+            </div>
+            <div class="answer">
+            <h3>Posted By: {{ answer.posted_by|default:"Anonymous" }}, Posted On: {{ answer.posted_on }}</h3>
+            <p>{{ answer.answer }}</p>
+            </div>
         </div>
-        <div class="answer">
-        <h3>Posted By: {{ answer.posted_by|default:"Anonymous" }}, Posted On: {{ answer.posted_on }}</h3>
-        <p>{{ answer.answer }}</p>
-        </div>
-    </div>
+    </a>
 {% endfor %}
 </div>
 {% endblock %}
